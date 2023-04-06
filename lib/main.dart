@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:spotify_clone/Screens/song_screen.dart';
 import 'Screens/homescreen.dart';
 
 void main() {
-  runApp(Spotify());
+  runApp(const Spotify());
 }
 
 class Spotify extends StatelessWidget {
@@ -11,6 +12,7 @@ class Spotify extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {Song_Screen.routeName: (context) => Song_Screen()},
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
       title: 'Spotify',

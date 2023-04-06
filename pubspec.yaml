@@ -64,6 +64,10 @@ flutter:
     - assets/meta.jpg
     - assets/ste.jpg
     - assets/udt.png 
+    - assets/mol.jpg
+    - assets/ad.jpg
+    - assets/ho.jpg
+    - assets/rockstar.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

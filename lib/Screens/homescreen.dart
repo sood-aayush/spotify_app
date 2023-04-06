@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../Widgets/genre.dart';
+import 'package:spotify_clone/Screens/search_screen.dart';
+import 'package:spotify_clone/Widgets/song_jbi.dart';
 
-import '../Widgets/song_tile.dart';
+import '../Widgets/song_recommend.dart';
 import '../Widgets/greeting.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     greeting(),
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 35,
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -43,14 +44,47 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icons.search,
                       color: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Search_Screen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
             ),
-            Genre(),
-            SongTile(),
-            SongTile(),
+            Row(
+              children: [
+                Container(
+                  child: Text(
+                    'Recommended',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                new Spacer(),
+              ],
+            ),
+            SongREC(),
+            Row(
+              children: [
+                Container(
+                  child: Text(
+                    'Jump back in',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                new Spacer(),
+              ],
+            ),
+            SongJBI(),
           ],
         ),
       ),
