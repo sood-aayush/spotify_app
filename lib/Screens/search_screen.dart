@@ -10,7 +10,11 @@ class Search_Screen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            SizedBox(
+              width: 50,
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
                   child: Text(
@@ -21,13 +25,13 @@ class Search_Screen extends StatelessWidget {
                     ),
                   ),
                 ),
-                new Spacer(),
               ],
             ),
             Container(
               color: Colors.white,
               child: TextField(
                 decoration: InputDecoration(
+                  hintText: 'What do you want to listen to?',
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.black,
@@ -40,6 +44,31 @@ class Search_Screen extends StatelessWidget {
                 ),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  child: Text(
+                    'Browse all',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            GridView.builder(
+              itemCount: 10,
+              shrinkWrap: true,
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemBuilder: (context, index) {
+                return GridTile(
+                  child: Text('Podcasts'),
+                );
+              },
+            )
           ],
         ),
       ),

@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_clone/Screens/song_screen.dart';
 import '../Models/song_model.dart';
-
-class Arguments {
-  final int id;
-  final String name;
-  final String artist;
-  final Image image;
-  Arguments(
-    this.id,
-    this.name,
-    this.artist,
-    this.image,
-  );
-}
+import '../Screens/song_screen.dart';
 
 class SongREC extends StatelessWidget {
   @override
@@ -43,24 +31,27 @@ class SongREC extends StatelessWidget {
       image: Image.asset('assets/ste.jpg'),
     ),
   ];
+
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
           children: smodel.map((smo) {
+        final data = SongModel(
+          id: smo.id,
+          name: smo.name,
+          artist: smo.artist,
+          image: smo.image,
+        );
         return GridTile(
             child: Container(
           padding: EdgeInsets.all(10),
           child: GestureDetector(
             onTap: () {
-              Navigator.pushNamed(
+              Navigator.pushReplacement(
                 context,
-                Song_Screen.routeName,
-                arguments: Arguments(
-                  1,
-                  'Blinding Lights',
-                  'Weeknd',
-                  Image.asset('assets/bl.jpg'),
+                MaterialPageRoute(
+                  builder: (context) => Song_Screen(recdata: data),
                 ),
               );
             },

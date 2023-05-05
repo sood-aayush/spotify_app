@@ -4,7 +4,6 @@ class SongModel {
   final int id;
   final String name;
   final String artist;
-
   final Image image;
   SongModel({
     required this.id,
