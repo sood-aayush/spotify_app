@@ -15,17 +15,9 @@ class Spotify extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = SongModel(
-      id: 0,
-      name: '',
-      artist: '',
-      image: Image.asset('assets/0.jpg'),
-    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(
-        recdata: data,
-      ),
+      home: HomeScreen(),
       title: 'Spotify',
     );
   }

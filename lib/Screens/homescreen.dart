@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_clone/Screens/addsongs.dart';
+import 'package:spotify_clone/Widgets/anime.dart';
+import 'package:spotify_clone/Widgets/phonk.dart';
 import 'package:spotify_clone/Screens/search_screen.dart';
 import 'package:spotify_clone/Widgets/miniplayer.dart';
+import 'package:spotify_clone/Widgets/punjabi.dart';
+
 import 'package:spotify_clone/Widgets/song_jbi.dart';
 import '../Models/song_model.dart';
 
@@ -9,16 +13,11 @@ import '../Widgets/song_recommend.dart';
 import '../Widgets/greeting.dart';
 
 class HomeScreen extends StatefulWidget {
-  final SongModel recdata;
-  HomeScreen({required this.recdata});
-
   @override
-  State<HomeScreen> createState() => _HomeScreenState(recdata: recdata);
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final SongModel recdata;
-  _HomeScreenState({required this.recdata});
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -26,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -35,111 +34,137 @@ class _HomeScreenState extends State<HomeScreen> {
             Colors.black,
           ],
         )),
-        child: Column(
-          children: <Widget>[
-            SafeArea(
-              child: Row(
-                children: [
-                  Container(
-                    width: screenWidth * 0.7,
-                    child: Text(
-                      greeting(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 35,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: <Widget>[
+              SafeArea(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: screenWidth * 0.7,
+                      child: Text(
+                        greeting(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 35,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      textAlign: TextAlign.left,
                     ),
-                  ),
-                  new Spacer(),
-                  Container(
-                    width: screenWidth * 0.1,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.add,
-                        color: Colors.white,
+                    const Spacer(),
+                    SizedBox(
+                      width: screenWidth * 0.1,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddSongs(),
+                              ));
+                        },
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.1,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.1,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => AddSongs(),
-                            ));
-                      },
-                    ),
-                  ),
-                  Container(
-                    width: screenWidth * 0.1,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.white,
+                              builder: (context) => Search_Screen(),
+                            ),
+                          );
+                        },
                       ),
-                      onPressed: () {},
                     ),
-                  ),
-                  Container(
-                    width: screenWidth * 0.1,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => Search_Screen(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Container(
-                  child: Text(
+              Row(
+                children: const [
+                  Text(
                     'Recommended',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
-                ),
-                new Spacer(),
-              ],
-            ),
-            SongREC(),
-            Row(
-              children: [
-                Container(
-                  child: Text(
+                ],
+              ),
+              SongREC(),
+              Row(
+                children: const [
+                  Text(
                     'Jump back in',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
-                ),
-                new Spacer(),
-              ],
-            ),
-            SongJBI(),
-            new Spacer(),
-            Mini_Player(
-              recdata: recdata,
-            ),
-            SizedBox(
-              height: 10,
-            )
-          ],
+                ],
+              ),
+              SongJBI(),
+              Row(
+                children: const [
+                  Text(
+                    'Phonk',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+              Phonk(),
+              Row(
+                children: const [
+                  Text(
+                    'Anime',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+              Anime(),
+              Row(
+                children: const [
+                  Text(
+                    'Punjabi',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+              PunjabiSongs(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.transparent,
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,

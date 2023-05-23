@@ -6,6 +6,10 @@ class Mini_Player extends StatelessWidget {
   Mini_Player({required this.recdata});
   @override
   Widget build(BuildContext context) {
+    return miniplayer();
+  }
+
+  Widget miniplayer() {
     return Container(
       height: 70,
       child: Card(
@@ -17,9 +21,9 @@ class Mini_Player extends StatelessWidget {
               SizedBox(
                 width: 66,
                 height: 66,
-                child: recdata.image,
+                child: Image.network(recdata.image),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Column(
@@ -28,19 +32,19 @@ class Mini_Player extends StatelessWidget {
                 children: [
                   Text(
                     recdata.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
                   Text(
                     recdata.artist,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.grey,
                     ),
                   ),
                 ],
               ),
-              new Spacer(),
+              const Spacer(),
               CircleAvatar(
                 radius: 25,
                 backgroundColor: Colors.black54,

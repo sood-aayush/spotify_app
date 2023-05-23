@@ -35,25 +35,7 @@ class _Song_ScreenState extends State<Song_Screen> {
   Duration position = Duration.zero;
 
   @override
-  void initstate() {
-    super.initState();
-
-    player.onPlayerStateChanged.listen((state) {
-      setState(() {
-        isPlaying = state == PlayerState.playing;
-      });
-    });
-    player.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
-    });
-    player.onPositionChanged.listen((newposition) {
-      setState(() {
-        position = newposition;
-      });
-    });
-  }
+  void initstate() {}
 
   @override
   void dispose() {
@@ -63,6 +45,21 @@ class _Song_ScreenState extends State<Song_Screen> {
   }
 
   Widget build(BuildContext context) {
+    player.onPlayerStateChanged.listen((state) {
+      setState(() {
+        isPlaying = state == PlayerState.playing;
+      });
+    });
+    player.onDurationChanged.listen((Duration newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+    player.onPositionChanged.listen((Duration newposition) {
+      setState(() {
+        position = newposition;
+      });
+    });
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -78,13 +75,7 @@ class _Song_ScreenState extends State<Song_Screen> {
             ),
             onPressed: () {
               {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(
-                        recdata: widget.recdata,
-                      ),
-                    ));
+                Navigator.pop(context);
               }
             },
           ),
@@ -109,7 +100,7 @@ class _Song_ScreenState extends State<Song_Screen> {
                 child: SizedBox(
                   width: 300,
                   height: 300,
-                  child: widget.recdata.image,
+                  child: Image.network('${widget.recdata.image}'),
                 ),
               ),
               Column(
@@ -130,36 +121,36 @@ class _Song_ScreenState extends State<Song_Screen> {
               ),
               Column(
                 children: [
-                  SliderTheme(
-                    data: const SliderThemeData(
-                        trackHeight: 2,
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 5),
-                        overlayShape:
-                            RoundSliderOverlayShape(overlayRadius: 0)),
-                    child: Slider(
-                      thumbColor: Colors.white,
-                      min: 0,
-                      max: duration.inSeconds.toDouble(),
-                      inactiveColor: Colors.grey.shade700,
-                      value: position.inSeconds.toDouble(),
-                      onChanged: (value) async {
-                        final position = Duration(seconds: value.toInt());
-                        await player.seek(position);
-                        await player.resume();
-                      },
-                      activeColor: Colors.white,
-                    ),
+                  Slider(
+                    thumbColor: Colors.white,
+                    min: 0,
+                    max: duration.inSeconds.toDouble(),
+                    inactiveColor: Colors.grey.shade700,
+                    value: position.inSeconds.toDouble(),
+                    onChanged: (value) async {
+                      final position = Duration(seconds: value.toInt());
+                      await player.seek(position);
+                      await player.resume();
+                    },
+                    activeColor: Colors.white,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(formatTime(
-                        position,
-                      )),
-                      Text(formatTime(
-                        duration,
-                      ))
+                      Text(
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          formatTime(
+                            position,
+                          )),
+                      Text(
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          formatTime(
+                            duration,
+                          ))
                     ],
                   ),
                 ],
@@ -205,7 +196,7 @@ class _Song_ScreenState extends State<Song_Screen> {
                             isPlaying = false;
                           });
                         } else {
-                          await player.play(AssetSource('mol.mp3'));
+                          await player.play(UrlSource(widget.recdata.songUrl));
                           setState(() {
                             isPlaying = true;
                           });

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_clone/Screens/song_screen.dart';
 import '../Models/song_model.dart';
+import '../Screens/song_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SongJBI extends StatefulWidget {
+class Anime extends StatefulWidget {
+  const Anime({super.key});
+
   @override
-  State<SongJBI> createState() => SongJBIState();
+  State<Anime> createState() => _AnimeState();
 }
 
-class SongJBIState extends State<SongJBI> {
+class _AnimeState extends State<Anime> {
   Stream<List<SongModel>> readUsers() => FirebaseFirestore.instance
-      .collection('s_jbi')
+      .collection('anime')
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => SongModel.fromJson(doc.data())).toList());
@@ -39,11 +42,10 @@ class SongJBIState extends State<SongJBI> {
 
   Widget buildUser(SongModel ssss) {
     SongModel data = SongModel(
-      name: ssss.name,
-      artist: ssss.artist,
-      image: ssss.image,
-      songUrl: ssss.songUrl,
-    );
+        name: ssss.name,
+        artist: ssss.artist,
+        image: ssss.image,
+        songUrl: ssss.songUrl);
     return GridTile(
         child: GestureDetector(
       onTap: () {
