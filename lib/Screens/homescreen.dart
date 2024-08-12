@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Anime',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 30,
                     ),
                   ),
                 ],
